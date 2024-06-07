@@ -3,5 +3,5 @@
 import { Cart } from "@/components/cart.component"
 
 export default async function CartPage() {
-    return <Cart />
+    return <h1>Empty</h1>
 }

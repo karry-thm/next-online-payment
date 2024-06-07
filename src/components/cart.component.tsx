@@ -8,9 +8,12 @@ export interface CartItem {
     singlePrice: number
 }
 
-export function Cart() {
-    const [cart, setCart] = useState<CartItem[]>([])
+export interface CartProps {
+    items: CartItem[],
+    onChange: (items: CartItem[]) => void
+}
 
+export function Cart({ items, onChange }: CartProps) {
     return <>
         <table>
             <thead>
@@ -21,14 +24,14 @@ export function Cart() {
                 </tr>
             </thead>
             <tbody>
-                {cart.map((item) => <tr>
+                {items.map((item, i) => <tr key={i}>
                     <td>{item.name}</td>
                     <td>{item.qty}</td>
                     <td>{item.singlePrice}</td>
                 </tr>)}
             </tbody>
         </table>
-        <CartItemForm onAdd={(item)=>setCart([...cart, item])}/>
+        <CartItemForm onAdd={(item) => onChange([...items, item])} />
     </>
 }
 
@@ -42,16 +45,16 @@ function CartItemForm(props: CartItemFormProps) {
     const [singlePrice, setSinglePrice] = useState<number>(0);
 
     function add() {
-        props.onAdd({name, qty, singlePrice});
+        props.onAdd({ name, qty, singlePrice });
         setName("");
         setQty(0);
         setSinglePrice(0);
     }
 
     return <div>
-        <input type="text" value={name} onChange={(evnt)=>setName(evnt.target.value)}/>
-        <input type="number" value={qty} onChange={(evnt)=>setQty(parseInt(evnt.target.value))}/>
-        <input type="number" value={singlePrice} onChange={(evnt)=>setSinglePrice(parseInt(evnt.target.value))}/>
+        <input type="text" value={name} onChange={(evnt) => setName(evnt.target.value)} />
+        <input type="number" value={qty} onChange={(evnt) => setQty(parseInt(evnt.target.value))} />
+        <input type="number" value={singlePrice} onChange={(evnt) => setSinglePrice(parseInt(evnt.target.value))} />
         <button onClick={add}>Hinzufügen</button>
     </div>
 }
