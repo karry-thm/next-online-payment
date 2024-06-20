@@ -1,7 +1,7 @@
-"use server"
+import ManagedCart from "@/components/cart/ManagedCart.component";
 
-import { Cart } from "@/components/cart.component"
-
-export default async function CartPage() {
-    return <h1>Empty</h1>
+export default async function cartpay() {
+    return <main>
+        <ManagedCart />
+    </main>
 }
