@@ -1,10 +1,9 @@
 import cap from "@/components/cart/payment/capture.action";
 
 export default async function capture({ params, searchParams }: { params: { id: string }, searchParams?: { token?: string, PayerID?: string } }) {
-    console.log("CAPTURE", searchParams?.token);
     console.log(await cap(searchParams?.token || "asdf"));
     return <div>
-        <h1>Capture</h1>
+        <h1>Captured</h1>
         <table>
             <tbody>
                 <tr>
